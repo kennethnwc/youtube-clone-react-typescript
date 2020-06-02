@@ -1,10 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 
-interface Props {}
+import { Paper, TextField } from "@material-ui/core";
 
-const SearchBar: React.FC<Props> = () => {
-  const [searchTerm, setsearchTerm] = useState("");
-  return <h1>This is a search bar</h1>;
+interface Props {
+  onFormSubmit: (searchTerm: string) => void;
+}
+
+const SearchBar: React.FC<Props> = ({ onFormSubmit }) => {
+  const [searchTerm, setsearchTerm] = useState<string>("");
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    onFormSubmit(searchTerm);
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setsearchTerm(e.target.value);
+  };
+
+  console.log(searchTerm);
+
+  return (
+    <Paper elevation={6} style={{ padding: "25px" }}>
+      <form onSubmit={handleSubmit}>
+        <TextField fullWidth label="search..." onChange={handleChange} />
+      </form>
+    </Paper>
+  );
 };
 
 export default SearchBar;
