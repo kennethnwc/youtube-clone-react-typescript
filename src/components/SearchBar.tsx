@@ -18,8 +18,6 @@ const SearchBar: React.FC<Props> = ({ onFormSubmit }) => {
     setsearchTerm(e.target.value);
   };
 
-  console.log(searchTerm);
-
   return (
     <Paper elevation={6} style={{ padding: "25px" }}>
       <form onSubmit={handleSubmit}>
